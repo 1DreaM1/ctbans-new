@@ -1,11 +1,11 @@
 {
-    "title": "SB Admin 2",
-    "name": "startbootstrap-sb-admin-2",
-    "version": "4.0.7",
+    "title": "CTBans",
+    "name": "ctbans",
+    "version": "1.0.0",
     "scripts": {
         "start": "node_modules/.bin/gulp watch"
     },
-    "description": "An open source Bootstrap 4 admin theme.",
+    "description": "CtBans web interface for Addicted's plugin",
     "keywords": [
         "css",
         "sass",
@@ -16,19 +16,16 @@
         "admin",
         "app"
     ],
-    "homepage": "https://startbootstrap.com/template-overviews/sb-admin-2",
+    "homepage": "https://github.com/1DreaM1/ctbans-new",
     "bugs": {
-        "url": "https://github.com/BlackrockDigital/startbootstrap-sb-admin-2/issues",
-        "email": "feedback@startbootstrap.com"
+        "url": "https://github.com/1DreaM1/ctbans-new/issues",
+        "email": "dream@overgame.eu"
     },
-    "license": "MIT",
-    "author": "Start Bootstrap",
-    "contributors": [
-        "David Miller (http://davidmiller.io/)"
-    ],
+    "license": "Apache-2.0",
+    "author": "DreaM",
     "repository": {
         "type": "git",
-        "url": "https://github.com/BlackrockDigital/startbootstrap-sb-admin-2.git"
+        "url": "https://github.com/1DreaM1/ctbans-new.git"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "5.10.2",
