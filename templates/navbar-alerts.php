@@ -17,13 +17,13 @@ $todayTimestamp = strtotime(date("d.m.Y"));
         </h6>
         <a class="dropdown-item d-flex align-items-center" href="#">
             <div class="mr-3">
-                <div class="icon-circle bg-primary">
-                    <i class="fas fa-ban text-white"></i>
+                <div class="icon-circle bg-danger">
+                    <i class="fas fa-user-lock text-white"></i>
                 </div>
             </div>
             <div>
                 <div class="small text-gray-500"><?php echo date("M d Y "); ?></div>
-                <span class="font-weight-bold">Today <?php echo $loader->getBansCount("WHERE `created` LIKE '{$todayTimestamp}%'")?> new bans !</span>
+                <span>Today <span class="text-primary"><?php echo $loader->getBansCount("WHERE `created` LIKE '{$todayTimestamp}%'")?></span> new bans !</span>
             </div>
         </a>
         <a class="dropdown-item text-center small text-gray-500" href="#">Show all alerts</a>

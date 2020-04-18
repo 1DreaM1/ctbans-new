@@ -4,6 +4,12 @@
         <span>Dashboard</span></a>
 </li>
 
+<li class="nav-item" id="bans">
+    <a class="nav-link" href="bans">
+        <i class="fas fa-fw fa-user-clock"></i>
+        <span>Bans</span></a>
+</li>
+
 <?php if($auth->IsUserLoggedIn()): ?>
 <!-- Divider -->
 <hr class="sidebar-divider">
@@ -36,20 +42,15 @@
 </div>
 
 <!-- Nav Item - Tables -->
-<li class="nav-item" id="receipts">
+<li class="nav-item">
     <a class="nav-link" href="#">
         <i class="fas fa-fw fa-file-invoice-dollar"></i>
         <span>Main Page</span></a>
 </li>
-<li class="nav-item" id="items">
+<li class="nav-item">
     <a class="nav-link" href="#">
         <i class="fas fa-fw fa-boxes"></i>
         <span>EVIP</span></a>
-</li>
-<li class="nav-item" id="items">
-    <a class="nav-link" href="#">
-        <i class="fas fa-fw fa-file-invoice-dollar"></i>
-        <span>BanList</span></a>
 </li>
 
 <!-- Divider -->

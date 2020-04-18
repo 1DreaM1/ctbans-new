@@ -50,7 +50,7 @@ class Session
             return false;
     }
 
-    public function usersCount($filter = "") {
+    public function usersCount($filter = NULL) {
         $sql = "SELECT * FROM `ctbans_users` {$filter}";
         $result = $this->DB->dbCon->query($sql);
         return $result->num_rows;

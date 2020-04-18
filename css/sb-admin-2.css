@@ -1373,7 +1373,7 @@ pre code {
 .table th,
 .table td {
   padding: 0.75rem;
-  vertical-align: top;
+  vertical-align: center;
   border-top: 1px solid #e3e6f0;
 }
 
@@ -11019,3 +11019,12 @@ body.sidebar-toggled footer.sticky-footer {
 .bg-gradient-custom {
   background: linear-gradient(50deg, #224abe, #ce4f42);
 }
+
+.admin-animate-left{position:relative;animation:animateleft 0.8s}@keyframes animateleft{from{left:-300px;opacity:0} to{left:0;opacity:1}}
+.admin-animate-fading{animation:fading 10s infinite}@keyframes fading{0%{opacity:0}50%{opacity:1}100%{opacity:0}}
+.admin-animate-opacity{animation:opac 0.8s}@keyframes opac{from{opacity:0} to{opacity:1}}
+.admin-animate-top{position:relative;animation:animatetop 0.8s}@keyframes animatetop{from{top:-300px;opacity:0} to{top:0;opacity:1}}
+.admin-animate-left{position:relative;animation:animateleft 0.8s}@keyframes animateleft{from{left:-300px;opacity:0} to{left:0;opacity:1}}
+.admin-animate-right{position:relative;animation:animateright 0.8s}@keyframes animateright{from{right:-300px;opacity:0} to{right:0;opacity:1}}
+.admin-animate-bottom{position:relative;animation:animatebottom 0.8s}@keyframes animatebottom{from{bottom:-300px;opacity:0} to{bottom:0;opacity:1}}
+.admin-animate-zoom {animation:animatezoom 0.6s}@keyframes animatezoom{from{transform:scale(0)} to{transform:scale(1)}}

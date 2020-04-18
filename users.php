@@ -168,7 +168,7 @@ $session = new Session();
 
                   <div class="col-lg-8">
                       <!-- Dropdown Card Example -->
-                      <div class="card shadow mb-4">
+                      <div class="card shadow mb-4 onload-animate-left">
                           <!-- Card Header - Dropdown -->
                           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                               <h6 class="m-0 font-weight-bold text-primary">Users Table</h6>
@@ -195,7 +195,7 @@ $session = new Session();
                   <div class="col-lg-4">
 
                       <!-- Collapsable Card Example -->
-                      <div class="card shadow mb-4">
+                      <div class="card shadow mb-4 onload-animate-bottom">
                           <!-- Card Header - Accordion -->
                           <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
                               <h6 class="m-0 font-weight-bold text-primary">Actions</h6>

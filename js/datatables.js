@@ -1,8 +1,13 @@
 // Call the dataTables jQuery plugin
 $(document).ready(function() {
   $('#dataTable').DataTable({
-    "order": [[ 0, "desc" ]]
-  } );
+    "order": [[ 0, "desc" ]],
+    "iDisplayLength": 50,
+    "columnDefs": [{
+      "targets": 6,
+      "orderable": false
+    }]
+  });
 });
 
 //SLOVAK TRANSLATION
@@ -20,6 +25,11 @@ $(document).ready(function() {
         "next": "Ďalšia"
       }
     },
-    "order": [[ 0, "desc" ]]
-  } );
+    "order": [[ 0, "desc" ]],
+    "iDisplayLength": 50,
+    "columnDefs": [{
+      "targets": 6,
+      "orderable": false
+    }]
+  });
 });*/

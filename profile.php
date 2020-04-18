@@ -143,7 +143,7 @@ $user = Loader::getUserInfo($auth->SteamID);
               <div class="row">
 
                   <!-- Earnings (Monthly) Card Example -->
-                  <div class="col-xl-3 col-md-6 mb-4">
+                  <div class="col-xl-3 col-md-6 mb-4 onload-animate-zoom">
                       <div class="card border-left-primary shadow h-100 py-2">
                           <div class="card-body">
                               <div class="row no-gutters align-items-center">
@@ -160,7 +160,7 @@ $user = Loader::getUserInfo($auth->SteamID);
                   </div>
 
                   <!-- Earnings (Monthly) Card Example -->
-                  <div class="col-xl-3 col-md-6 mb-4">
+                  <div class="col-xl-3 col-md-6 mb-4 onload-animate-zoom">
                       <div class="card border-left-success shadow h-100 py-2">
                           <div class="card-body">
                               <div class="row no-gutters align-items-center">
@@ -177,7 +177,7 @@ $user = Loader::getUserInfo($auth->SteamID);
                   </div>
 
                   <!-- Earnings (Monthly) Card Example -->
-                  <div class="col-xl-3 col-md-6 mb-4">
+                  <div class="col-xl-3 col-md-6 mb-4 onload-animate-zoom">
                       <div class="card border-left-info shadow h-100 py-2">
                           <div class="card-body">
                               <div class="row no-gutters align-items-center">
@@ -198,7 +198,7 @@ $user = Loader::getUserInfo($auth->SteamID);
                   </div>
 
                   <!-- Pending Requests Card Example -->
-                  <div class="col-xl-3 col-md-6 mb-4">
+                  <div class="col-xl-3 col-md-6 mb-4 onload-animate-zoom">
                       <div class="card border-left-warning shadow h-100 py-2">
                           <div class="card-body">
                               <div class="row no-gutters align-items-center">
@@ -218,7 +218,7 @@ $user = Loader::getUserInfo($auth->SteamID);
 
                   <div class="col-lg-6">
                       <!-- Dropdown Card Example -->
-                      <div class="card shadow mb-4">
+                      <div class="card shadow mb-4 onload-animate-left">
                           <!-- Card Body -->
                           <div class="card-body text-gray-900">
                               Steam Profile Info:<br>
@@ -231,19 +231,25 @@ $user = Loader::getUserInfo($auth->SteamID);
                               </div>
                               <div class="input-group mb-3">
                                   <div class="input-group-prepend">
+                                      <span class="input-group-text" id="basic-addon1"><code>SteamID:</code></span>
+                                  </div>
+                                  <input type="text" value="<?=Loader::toSteamID($auth->SteamID);?>" class="form-control" aria-label="SteamID64" aria-describedby="basic-addon1">
+                              </div>
+                              <div class="input-group mb-3">
+                                  <div class="input-group-prepend">
                                       <span class="input-group-text" id="basic-addon1"><code>Status:</code></span>
                                   </div>
                                   <input type="text" value="<?=$user[0]?>" class="form-control" aria-label="Status" aria-describedby="basic-addon1">
                               </div>
                               <div class="input-group mb-3">
                                   <div class="input-group-prepend">
-                                      <span class="input-group-text" id="basic-addon1"><code>Custom Name:</code></span>
+                                      <span class="input-group-text" id="basic-addon1"><code>Member since:</code></span>
                                   </div>
                                   <input type="text" value="<?=$user[1]?>" class="form-control" aria-label="Custom Name" aria-describedby="basic-addon1">
                               </div>
                               <div class="input-group mb-3">
                                   <div class="input-group-prepend">
-                                      <span class="input-group-text" id="basic-addon1"><code>Member since:</code></span>
+                                      <span class="input-group-text" id="basic-addon1"><code>Custom Name:</code></span>
                                   </div>
                                   <input type="text" value="<?=$user[2]?>" class="form-control" aria-label="Member since" aria-describedby="basic-addon1">
                               </div>
@@ -254,7 +260,7 @@ $user = Loader::getUserInfo($auth->SteamID);
                   <div class="col-lg-6">
 
                       <!-- Collapsable Card Example -->
-                      <div class="card shadow mb-4">
+                      <div class="card shadow mb-4 onload-animate-bottom">
                           <!-- Card Header - Accordion -->
                           <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
                               <h6 class="m-0 font-weight-bold text-primary">Info</h6>

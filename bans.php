@@ -26,7 +26,7 @@ $loader = new Loader();
   <meta name="description" content="CTBans">
   <meta name="author" content="DreaM">
 
-  <title>JailBreak CT Bans</title>
+  <title>JailBreak CT Bans - Bans</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -55,7 +55,7 @@ $loader = new Loader();
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fab fa-vuejs"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">CTBANS</div>
+        <div class="sidebar-brand-text mx-3">Bans</div>
       </a>
 
       <!-- Divider -->
@@ -175,125 +175,41 @@ $loader = new Loader();
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <?php if(!$auth->IsUserLoggedIn()): ?><a href="login" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-sign-in-alt fa-sm text-white-50"></i> Sign In</a><?php endif; ?>
-          </div>
-
-          <!-- Content Row -->
-          <div class="row">
-
-            <!-- Obrat (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4 onload-animate-zoom">
-              <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Bans</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $loader->getBansCount(); ?></div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-ban fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-              <!-- Obrat (Dayly) Card Example -->
-              <div class="col-xl-3 col-md-6 mb-4 onload-animate-zoom">
-                  <div class="card border-left-warning shadow h-100 py-2">
-                      <div class="card-body">
-                          <div class="row no-gutters align-items-center">
-                              <div class="col mr-2">
-                                  <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Expired</div>
-                                  <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $loader->getBansCount("WHERE `removed`='E'"); ?></div>
-                              </div>
-                              <div class="col-auto">
-                                  <i class="fas fa-hourglass-half fa-2x text-gray-300"></i>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-
-            <!-- Receipts Count Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4 onload-animate-zoom">
-              <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Unbanned</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $loader->getBansCount("WHERE `removed`='R'"); ?></div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-unlock-alt fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Items Count Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4 onload-animate-zoom">
-              <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Permanent</div>
-                      <div class="row no-gutters align-items-center">
-                        <div class="col-auto">
-                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?php echo $loader->getBansCount("WHERE `removed`='N' AND `timeleft`='-1'"); ?></div>
-                        </div>
-                        <div class="col">
-                          <div class="progress progress-sm mr-2">
-                              <?php
-                                $permanent = $loader->getBansCount("WHERE `removed`='N' AND `timeleft`='-1'");
-                                $bans = $loader->getBansCount();
-                              ?>
-                            <div class="progress-bar bg-info" role="progressbar" style="width: <?=(100/$bans) * $permanent?>%" aria-valuenow="<?=(100/$bans) * $permanent?>" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-user-lock fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <h1 class="h3 mb-0 text-gray-800">Bans</h1>
           </div>
 
             <div class="card shadow mb-4 onload-animate-bottom">
                 <div class="card-header py-3">
-                    <h6 class="font-weight-bold text-primary mb-0">Latest Bans</h6>
+                    <h6 class="font-weight-bold text-primary mb-0">Ban List</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-hover" width="100%" cellspacing="0">
+                        <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
                             <thead>
-                            <tr>
-                                <th style="display: none;">ID</th>
-                                <th>Name</th>
-                                <th>Created</th>
-                                <th>Length</th>
-                                <th>Reason</th>
-                                <th>Time Left</th>
-                            </tr>
+                                <tr>
+                                    <th style="display: none;">ID</th>
+                                    <th>Name</th>
+                                    <th>Created</th>
+                                    <th>Length</th>
+                                    <th>Reason</th>
+                                    <th>Time Left</th>
+                                    <?php if($auth->IsUserLoggedIn()): ?><th class="text-center">Actions</th><?php endif; ?>
+                                </tr>
                             </thead>
                             <tfoot>
-                            <tr>
-                                <th style="display: none;">ID</th>
-                                <th>Name</th>
-                                <th>Created</th>
-                                <th>Length</th>
-                                <th>Reason</th>
-                                <th>Time Left</th>
-                            </tr>
+                                <tr>
+                                    <th style="display: none;">ID</th>
+                                    <th>Name</th>
+                                    <th>Created</th>
+                                    <th>Length</th>
+                                    <th>Reason</th>
+                                    <th>Time Left</th>
+                                    <?php if($auth->IsUserLoggedIn()): ?><th class="text-center">Actions</th><?php endif; ?>
+                                </tr>
                             </tfoot>
                             <tbody style="font-size: small; cursor: pointer;">
                             <?php
-                                print Loader::createTable($loader->getBans(null, "LIMIT 10"));
+                                print Loader::createTable($loader->getBans(), $auth->IsUserLoggedIn());
                             ?>
                             </tbody>
                         </table>

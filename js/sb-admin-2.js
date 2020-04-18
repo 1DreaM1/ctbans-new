@@ -49,6 +49,9 @@
   $(window).on('load', function() {
     // Animate loader off screen
     $(".loader").fadeOut(300);
+    $(".onload-animate-zoom").addClass("admin-animate-zoom");
+    $(".onload-animate-left").addClass("admin-animate-left");
+    $(".onload-animate-bottom").addClass("admin-animate-bottom");
 
     var pagePathName= window.location.pathname;
     var name = pagePathName.substring(pagePathName.lastIndexOf("/") + 1).replace(".php", "");
@@ -108,6 +111,63 @@
   $("#dropUser").on('click', function (event) {
       if(!confirm("Are you sure ?"))
         event.preventDefault();
+  });
+
+  $(".infoModal").on('click', function (event) {
+
+    event.preventDefault();
+    if(event.target.nodeName === "A" || event.target.nodeName === "I")
+      return;
+
+    $("tr").css("cursor", "progress");
+    var id = $(this).find('.ban_id').data('id');
+
+    $.get("includes/ajax/GetBanDetails.php", {id: id}, function (data) {
+      $.each(JSON.parse(data), function (index, value) {
+        if(~index.indexOf("_link"))
+          $("#" + index).find("a").attr("href", value);
+        else {
+          if(jQuery.isPlainObject(value))
+            $("#" + index).text(value[0]);
+          else
+            $("#" + index).text(value);
+        }
+      });
+      $('#banlistModal').modal('toggle');
+      $("tr").css("cursor", "pointer");
+    });
+  });
+
+  $(".unban").on('click', function (event) {
+    event.stopPropagation();
+    var name = $(this).parent().parent().children("td").eq(1).text();
+
+    if(confirm("Unban: \""+ name +"\" ?")) {
+      var id = $(this).data('id');
+      $.post("includes/ajax/BanActions.php", {id: id, action: 'unban'}, function (data) {
+        if(data === "1")
+          alert("Player wan unbanned !");
+        else
+          alert("Error while processing !");
+      });
+      location.reload();
+    }
+  });
+
+  $(".delete").on('click', function (event) {
+    event.stopPropagation();
+    var name = $(this).parent().parent().children("td").eq(1).text();
+
+    if(confirm("Delete: \""+ name +"\" ?")) {
+      var id = $(this).data('id');
+      $.post("includes/ajax/BanActions.php", {id: id, action: 'delete'}, function (data) {
+        if(data === "1")
+          alert("Ban wan deleted !");
+        else
+          alert("Error while processing !");
+      });
+      location.reload();
+    }
   });
 
 })(jQuery); // End of use strict
