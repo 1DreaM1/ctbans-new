@@ -395,7 +395,7 @@ $server = new Server();
                 <div class="card-header py-2 justify-content-between">
                     <h6 class="font-weight-bold pt-1 text-primary mb-0 float-left">Servers</h6>
                     <!--<a href="#" class="btn btn-primary btn-circle btn-sm float-right addServer"><i class="fas fa-plus"></i></a>-->
-                    <button type="button" class="btn btn-sm btn-outline-success float-right addServer">Add Server</button>
+                    <?php if($auth->IsUserLoggedIn()): ?><button type="button" class="btn btn-sm btn-outline-success float-right addServer">Add Server</button><?php endif; ?>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
