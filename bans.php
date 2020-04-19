@@ -179,8 +179,9 @@ $loader = new Loader();
           </div>
 
             <div class="card shadow mb-4 onload-animate-bottom">
-                <div class="card-header py-3">
-                    <h6 class="font-weight-bold text-primary mb-0">Ban List</h6>
+                <div class="card-header py-3 justify-content-between">
+                    <h6 class="font-weight-bold text-primary pt-1 mb-0 float-left">Ban List</h6>
+                    <!--<a href="#" class="btn btn-info btn-circle btn-sm float-right offlineBan"><i class="fas fa-user-lock"></i></a>-->
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

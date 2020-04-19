@@ -1,5 +1,6 @@
 <?php
 require_once "includes/Loader.php";
+require_once "includes/Server.php";
 include("includes/SteamAuth/SteamAuth.class.php");
 
 $auth = new SteamAuth();
@@ -13,6 +14,7 @@ if(isset($_GET['status']) && $_GET['status'] == "logout") {
 //});
 
 $loader = new Loader();
+$server = new Server();
 ?>
 
 <!DOCTYPE html>
@@ -109,7 +111,7 @@ $loader = new Loader();
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-            <!-- Modal -->
+            <!-- Modal Ban Info -->
             <div class="modal fade" id="banlistModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -168,6 +170,131 @@ $loader = new Loader();
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Server Info -->
+            <div class="modal fade bd-example-modal-lg" id="serverModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Server Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body table-responsive">
+                            <table class="table table-sm table-hover table-borderless">
+                                <thead class="table-light">
+                                <tr>
+                                    <th style="display:none;">ID</th>
+                                    <th>Server</th>
+                                    <th>Players</th>
+                                    <th>Map</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="display:none;" id="serverID"></td>
+                                        <td id="serverName"></td>
+                                        <td id="serverPlayers"></td>
+                                        <td id="serverMap"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <hr>
+                            <table class="table table-sm table-hover table-borderless">
+                                <thead class="table-dark">
+                                <tr>
+                                    <th>Player <span class="badge badge-info">6</span></th>
+                                    <th class="frags-column">Frags</th>
+                                    <th class="frags-column">Time</th>
+                                    <?php if($auth->IsUserLoggedIn()): ?><th class="text-center">Actions</th><?php endif; ?>
+                                </tr>
+                                </thead>
+                                <tbody id="appendServerPlayersInfo"></tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Ban Info -->
+            <div class="modal fade" id="addBanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">CTBan</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text pr-4">Name</div>
+                                </div>
+                                <input type="text" class="form-control bg-white text-danger font-weight-bold" id="staticName" readonly>
+                            </div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text" style="padding-right:1.8rem">Time</div>
+                                </div>
+                                <input type="number" min="0" class="form-control" id="inputTime" value="30" required>
+                            </div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Reason</div>
+                                </div>
+                                <input type="text" class="form-control text-primary" id="inputReason" value="Breaking Rules" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="confirmBan">Ban</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Add Server -->
+            <div class="modal fade" id="addServerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add Server</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">IP</div>
+                                </div>
+                                <input type="text" class="form-control" id="inputIp" required>
+                            </div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text pr-3">Port</div>
+                                </div>
+                                <input type="number" min="0" class="form-control" id="inputPort" value="27030" required>
+                            </div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Rcon</div>
+                                </div>
+                                <input type="text" class="form-control" id="inputRcon">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="confirmServer">Add Server</button>
                         </div>
                     </div>
                 </div>
@@ -263,6 +390,37 @@ $loader = new Loader();
               </div>
             </div>
           </div>
+
+            <div class="card shadow mb-4 onload-animate-left">
+                <div class="card-header py-2 justify-content-between">
+                    <h6 class="font-weight-bold pt-1 text-primary mb-0 float-left">Servers</h6>
+                    <!--<a href="#" class="btn btn-primary btn-circle btn-sm float-right addServer"><i class="fas fa-plus"></i></a>-->
+                    <button type="button" class="btn btn-sm btn-outline-success float-right addServer">Add Server</button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover" width="100%" cellspacing="0">
+                            <thead class="thead-light small">
+                            <tr>
+                                <th style="display: none;">ID</th>
+                                <th>MOD</th>
+                                <th>OS</th>
+                                <th>VAC</th>
+                                <th>Hostname</th>
+                                <th>Players</th>
+                                <th>Map</th>
+                                <?php if($auth->IsUserLoggedIn()): ?><th class="text-center">Actions</th><?php endif; ?>
+                            </tr>
+                            </thead>
+                            <tbody style="font-size:small;cursor:pointer;">
+                            <?php
+                                print $server->createServerTable($server->getServers(), $auth->IsUserLoggedIn());
+                            ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
             <div class="card shadow mb-4 onload-animate-bottom">
                 <div class="card-header py-3">

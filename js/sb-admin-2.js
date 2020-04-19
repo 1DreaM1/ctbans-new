@@ -144,13 +144,10 @@
 
     if(confirm("Unban: \""+ name +"\" ?")) {
       var id = $(this).data('id');
-      $.post("includes/ajax/BanActions.php", {id: id, action: 'unban'}, function (data) {
-        if(data === "1")
-          alert("Player wan unbanned !");
-        else
-          alert("Error while processing !");
+      $.post("includes/ajax/PlayerActions.php", {id: id, action: 'unban'}, function (data) {
+        alert(data);
+        location.reload();
       });
-      location.reload();
     }
   });
 
@@ -160,14 +157,95 @@
 
     if(confirm("Delete: \""+ name +"\" ?")) {
       var id = $(this).data('id');
-      $.post("includes/ajax/BanActions.php", {id: id, action: 'delete'}, function (data) {
-        if(data === "1")
-          alert("Ban wan deleted !");
-        else
+      $.post("includes/ajax/PlayerActions.php", {id: id, action: 'delete'}, function (data) {
+        if(data !== "1")
           alert("Error while processing !");
+
+        location.reload();
       });
-      location.reload();
     }
+  });
+
+  $(".serverInfoModal").on('click', function (event) {
+    event.preventDefault();
+    var id = $(this).find('.server_id').data('id');
+    $.get("includes/ajax/GetServerDetails.php", {id: id}, function (data) {
+      $("#appendServerPlayersInfo").html(data);
+
+      $(".ban").on('click', function (event) {
+        event.stopPropagation();
+        var name = $(this).data('id');
+        var serverid = $("#serverID").text();
+
+        $("#staticName").val(name);
+        $("#serverModal").modal("hide");
+        $("#addBanModal").modal("show");
+
+        $("#confirmBan").on('click', function () {
+          var time = $("#inputTime").val();
+          var reason = $("#inputReason").val();
+
+          $.post("includes/ajax/PlayerActions.php", {id: name, action: 'ban', serverid: serverid, time: time, reason: reason}, function (data) {
+            alert(data);
+          });
+          location.reload();
+        });
+      });
+
+      $(".kick").on('click', function (event) {
+        event.stopPropagation();
+        var name = $(this).data('id');
+        var serverid = $("#serverID").text();
+
+        if(confirm("Kick: \""+ name +"\" ?")) {
+          $.post("includes/ajax/PlayerActions.php", {id: name, action: 'kick', serverid: serverid}, function (data) {
+            alert(data);
+          });
+          location.reload();
+        }
+      });
+    });
+
+    $("#serverID").text($(this).children("td").eq(0).text());
+    $("#serverName").text($(this).children("td").eq(4).text());
+    $("#serverPlayers").text($(this).children("td").eq(5).text());
+    $("#serverMap").text($(this).children("td").eq(6).text());
+
+    $('#serverModal').modal('toggle');
+  });
+
+  $(".addServer").on('click', function (event) {
+    $("#addServerModal").modal("show");
+  });
+
+  $("#confirmServer").on('click', function (event) {
+    event.preventDefault();
+
+    if($("#inputIp").val() === "") {
+      alert("Empty IP");
+      return;
+    }
+
+    $.post("includes/ajax/ServerActions.php", {action: 'add', ip: $("#inputIp").val(), port: $("#inputPort").val(), rcon: $("#inputRcon").val()}, function (data) {
+      $("#addServerModal").modal("hide");
+
+      if(data !== "1")
+        alert("Error while processing !");
+
+      location.reload();
+    });
+  });
+
+  $(".deleteServer").on('click', function (event) {
+    event.stopPropagation();
+
+    var id = $(this).data("id");
+    $.post("includes/ajax/ServerActions.php", {action: 'delete', id: id}, function (data) {
+      if(data !== "1")
+        alert("Error while processing !");
+
+      location.reload();
+    });
   });
 
 })(jQuery); // End of use strict

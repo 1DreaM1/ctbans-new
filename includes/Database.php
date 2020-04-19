@@ -25,7 +25,13 @@ class Database
         $query = $this->dbCon->query("DESCRIBE `ctbans_users`");
         if(!$query) {
             $sql = file_get_contents(__DIR__ . "/sql/ctbans_users.sql");
-            return $query = $this->dbCon->multi_query($sql);
+            $this->dbCon->multi_query($sql);
+        }
+
+        $query = $this->dbCon->query("DESCRIBE `ctbans_servers`");
+        if(!$query) {
+            $sql = file_get_contents(__DIR__ . "/sql/ctbans_servers.sql");
+            $this->dbCon->multi_query($sql);
         }
     }
 
