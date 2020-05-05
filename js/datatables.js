@@ -4,7 +4,7 @@ $(document).ready(function() {
     "order": [[ 0, "desc" ]],
     "iDisplayLength": 50,
     "columnDefs": [{
-      "targets": 6,
+      "targets": 5,
       "orderable": false
     }]
   });
@@ -28,7 +28,7 @@ $(document).ready(function() {
     "order": [[ 0, "desc" ]],
     "iDisplayLength": 50,
     "columnDefs": [{
-      "targets": 6,
+      "targets": 5,
       "orderable": false
     }]
   });
