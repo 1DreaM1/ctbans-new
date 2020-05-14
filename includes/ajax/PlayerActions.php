@@ -36,4 +36,9 @@ switch ($action) {
         $result = $loader->deleteBan($id);
         echo $result;
         break;
+
+    case "offline_ban":
+        $result = $server->offlineBanPlayer($id, $time, $reason);
+        echo $result;
+        break;
 }

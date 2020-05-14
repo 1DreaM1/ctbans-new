@@ -173,6 +173,44 @@ $loader = new Loader();
                 </div>
             </div>
 
+            <!-- Modal Add Offline Ban -->
+            <div class="modal fade" id="addOfflineBanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add Offline Ban</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">SteamID</div>
+                                </div>
+                                <input type="text" class="form-control" id="inputSid" required>
+                            </div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text pr-4">Time</div>
+                                </div>
+                                <input type="number" min="0" class="form-control" id="inputTime" value="30" required>
+                            </div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">Reason</div>
+                                </div>
+                                <input type="text" class="form-control" id="inputReason">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="confirmOfflineBan">Add Ban</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Bans</h1>
@@ -182,6 +220,7 @@ $loader = new Loader();
                 <div class="card-header py-3 justify-content-between">
                     <h6 class="font-weight-bold text-primary pt-1 mb-0 float-left">Ban List</h6>
                     <!--<a href="#" class="btn btn-info btn-circle btn-sm float-right offlineBan"><i class="fas fa-user-lock"></i></a>-->
+                    <?php if($auth->IsUserLoggedIn()): ?><button type="button" class="btn btn-sm btn-outline-primary float-right addOfflineBan">Add Offline Ban</button><?php endif; ?>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

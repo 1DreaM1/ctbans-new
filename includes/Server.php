@@ -117,6 +117,12 @@ class Server
         return $this->serverRcon("sm_ctban \"{$id}\" {$time} \"{$reason}\"", $server[0][1], $server[0][2], $server[0][3]);
     }
 
+    public function offlineBanPlayer($id, $time, $reason)
+    {
+        $server = $this->getServers()[0];
+        return $this->serverRcon("sm_offlinectban \"{$id}\" {$time} \"{$reason}\"", $server[1], $server[2], $server[3]);
+    }
+
     public function kickPlayer($id, $serverID)
     {
         $server = $this->getServers("WHERE `id`='{$serverID}'");

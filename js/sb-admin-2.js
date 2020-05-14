@@ -218,6 +218,10 @@
     $("#addServerModal").modal("show");
   });
 
+  $(".addOfflineBan").on('click', function (event) {
+    $("#addOfflineBanModal").modal("show");
+  });
+
   $("#confirmServer").on('click', function (event) {
     event.preventDefault();
 
@@ -232,6 +236,31 @@
       if(data !== "1")
         alert("Error while processing !");
 
+      location.reload();
+    });
+  });
+
+  $("#confirmOfflineBan").on('click', function (event) {
+    event.preventDefault();
+
+    if($("#inputSid").val() === "") {
+      alert("Empty SID");
+      return;
+    }
+
+    if($("#inputTime").val() === "") {
+      alert("Empty SID");
+      return;
+    }
+
+    if($("#inputReason").val() === "") {
+      alert("Empty SID");
+      return;
+    }
+
+    $.post("includes/ajax/PlayerActions.php", {id: $("#inputSid").val(), action: 'offline_ban', time: $("#inputTime").val(), reason: $("#inputReason").val()}, function (data) {
+      $("#addOfflineBanModal").modal("hide");
+      alert(data);
       location.reload();
     });
   });
