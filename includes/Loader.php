@@ -56,6 +56,9 @@ class Loader
         foreach ($data as $item) {
             if ($item[7] == "E") {
                 $item[5] = "<a href=\"#\" class=\"badge badge-success\">Expired</a>";
+            } else if ($item[4] == "0" || $item[4] == 0) {
+                $item[5] = "<a href=\"#\" class=\"badge badge-danger\">Permanent</a>";
+                $item[4] = "<a href=\"#\" class=\"badge badge-danger\">Permanent</a>";
             } else if ($item[7] == "R") {
                 $item[5] = "<a href=\"#\" class=\"badge badge-primary\">Unbanned</a>";
             } else if ($item[7] == "N") {
@@ -78,7 +81,7 @@ class Loader
                       <td style=\"display: none;\" class='ban_id' data-id='{$item[0]}'>{$item[0]}</td>
                       <td>" . self::getUserName(self::convertSteamIdToCommunityId($item[1])) . "</td>
                       <td>" . date("d.m.Y H:i:s", $item[3]) . "</td>
-                      <td>" . self::decimal_to_time((double)$item[4]) . "</td>
+                      <td>" . self::decimal_to_time($item[4]) . "</td>
                       <td><strong>{$item[6]}</strong></td>
                       <td>{$item[5]}</td>
                       {$actions}
