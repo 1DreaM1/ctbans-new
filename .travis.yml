@@ -5,10 +5,9 @@ node_js:
   - "node"
 install:       npm install
 before_script:
-  - npm install -g gulp
+  - npm install
 script:
   - npm test
-  - gulp
 cache:
   directories:
     - node_modules
