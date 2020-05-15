@@ -91,7 +91,7 @@ class Server
         $result = "";
 
         foreach ($this->getServers() as $server) {
-            $result .= $this->serverRcon("sm_unctban {$sid}", $server[1], $server[2], $server[3]);
+            $result .= $this->serverRcon("sm_unctban \"{$sid}\"", $server[1], $server[2], $server[3]);
             $result .= "\n";
         }
 
@@ -119,8 +119,8 @@ class Server
 
     public function offlineBanPlayer($id, $time, $reason)
     {
-        $server = $this->getServers()[0];
-        return $this->serverRcon("sm_offlinectban \"{$id}\" {$time} \"{$reason}\"", $server[1], $server[2], $server[3]);
+        $server = $this->getServers();
+        return $this->serverRcon("sm_offlinectban \"{$id}\" {$time} \"{$reason}\"", $server[0][1], $server[0][2], $server[0][3]);
     }
 
     public function kickPlayer($id, $serverID)

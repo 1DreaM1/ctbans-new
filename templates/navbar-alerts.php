@@ -2,7 +2,8 @@
 require_once "includes/Loader.php";
 
 $loader = new Loader();
-$todayTimestamp = strtotime(date("d.m.Y"));
+$todayStartTimestamp = strtotime(date("d.m.Y 1:0:0"));
+$todayEndTimestamp = strtotime(date("d.m.Y 23:59:59"));
 ?>
 <li class="nav-item dropdown no-arrow mx-1">
     <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -23,7 +24,7 @@ $todayTimestamp = strtotime(date("d.m.Y"));
             </div>
             <div>
                 <div class="small text-gray-500"><?php echo date("M d Y "); ?></div>
-                <span>Today <span class="text-primary"><?php echo $loader->getBansCount("WHERE `created` LIKE '{$todayTimestamp}%'")?></span> new bans !</span>
+                <span>Today <span class="text-primary"><?php echo $loader->getBansCount("WHERE `created` > {$todayStartTimestamp} AND `created` < {$todayEndTimestamp}")?></span> new bans !</span>
             </div>
         </a>
         <a class="dropdown-item text-center small text-gray-500" href="#">Show all alerts</a>
